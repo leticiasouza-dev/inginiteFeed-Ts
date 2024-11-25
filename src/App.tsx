@@ -6,9 +6,9 @@ import styles from './App.module.css'
 import './global.css';
 import { Header } from "./components/Header/Header";
 import { SideBar } from './components/SideBar/SideBar';
-import { Post } from './components/Post/Post';
+import { Post, PostType } from './components/Post/Post';
 
-const post = [ //array de objetos
+const post: PostType[] = [ //array de objetos
   {
     id: 1,
     author: {
@@ -53,9 +53,10 @@ function App() {
           return (
             <Post
               key={post.id}
-              author={post.author} // passando os objetos como props, e do meu componente eu puxo as propriedade dele
-              content={post.content}
-              publishedAt={post.publishedAt}
+              // author={post.author} // passando os objetos como props, e do meu componente eu puxo as propriedade dele
+              // content={post.content}
+              // publishedAt={post.publishedAt}
+              post={post}
             />
           )
         })}

@@ -17,10 +17,16 @@ interface Content{
     content: string
 }
 
-interface PostPros {
+export interface PostType {
+    id: number
     author: Author;
     publishedAt: Date;
     content: Content[]
+}
+
+
+interface PostPros {
+    post: PostType
 }
 
 export function Post({author, publishedAt, content}: PostPros){ // aqui devemos informar o tipo do meu objeto todo, não individual
@@ -29,11 +35,11 @@ export function Post({author, publishedAt, content}: PostPros){ // aqui devemos 
 
     const [newCommentText, setNewCommentText] = useState('');
 
-    const publishedDataFormatted = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", { // manipulando datas
+    const publishedDataFormatted = format(post.publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", { // manipulando datas
         locale: ptBR,
     })
 
-    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    const publishedDateRelativeToNow = formatDistanceToNow(post.publishedAt, {
         locale: ptBR,
         addSuffix: true,
     })
@@ -79,7 +85,7 @@ export function Post({author, publishedAt, content}: PostPros){ // aqui devemos 
 
 
 
-                <time title={publishedDataFormatted} dateTime={publishedAt.toISOString()}>{publishedDateRelativeToNow}</time> 
+                <time title={publishedDataFormatted} dateTime={post.publishedAt.toISOString()}>{publishedDateRelativeToNow}</time> 
             </header>
                 <div className={styles.content}>
                     {content.map(line => {
